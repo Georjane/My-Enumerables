@@ -63,6 +63,69 @@ module Enumerable
     check    
   end
 
+  def my_none?(arg = nil)
+    array = is_a?(Range) || (Hash) ? self.to_a : self
+    check = true
+    if block_given?    
+      array.my_each { |value| check = false if yield(value)}
+    elsif arg.is_a?(Class)
+      array.my_each {|value| check = false if value.class.ancestors.include?(arg) }
+    elsif arg.is_a?(Regexp)
+      array.my_each {|value| check = false if value.match(arg) }
+    else
+      array.my_each { |value| check = false if value == true}
+    end 
+    check    
+  end
+
+  def my_count(arg = nil)
+    array = is_a?(Range) || (Hash) ? self.to_a : self
+    count = 0
+    if block_given?
+      array.my_each {|value| count += 1 if yield(value)}
+    elsif !arg.nil?
+      array.my_each {|value| count += 1 if value == arg}
+    else
+      count = array.size
+    end
+    count
+    
+  end
+
+  def my_map(&proc)
+    return to_enum unless block_given?
+    array = is_a?(Range) || (Hash) ? self.to_a : self
+    results = []
+    if proc.nil?
+      array.my_each { |value| results << yield(value)}
+    else    
+      array.my_each { |value| results << proc.(value)}
+    end
+    results    
+  end
+
+  def my_inject(*args)
+    array = is_a?(Range) || (Hash) ? self.to_a : self
+    memo = array[0]
+    if block_given?
+      if args[0].nil?
+        array.drop(1).my_each {|value| memo = yield(memo, value)}
+      else
+        memo = args[0]
+        array.my_each {|value| memo = yield(memo, value)}
+      end
+    else
+      if args[1].nil?
+        symbol = args[0]
+        array.drop(1).my_each {|value| memo = memo.send(symbol, value)}
+      else
+        memo = args[0]
+        symbol = args[1]
+        array.my_each {|value| memo = memo.send(symbol, value)}
+      end
+    end
+    memo
+  end
 end
 
 def multiply_els(arr)

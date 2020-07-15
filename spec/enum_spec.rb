@@ -1,15 +1,16 @@
 require './lib/myenum'
 
 describe Enumerable do
-  describe '#my_each' do
+  describe '#my_each()' do
     it 'returns self of object passed to it' do
-      expect([1, 2, 3].my_each { |x| x * 2 }).to eq[1, 2, 3]
+      arr = (1..3)
+      expect(arr.my_each { |x| x * 2 }).to eq 1..3
     end
   end
 
   describe '#my_each_with_index' do
     it 'returns self of object passed to it' do
-      expect([1, 2, 3].my_each_with_index { |x, y| x + y }).to eq[1, 2, 3]
+      expect([1, 2, 3].my_each_with_index { |x, y| x + y }).to eq [1, 2, 3]
     end
   end
 

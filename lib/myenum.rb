@@ -1,3 +1,8 @@
+require 'rubygems'
+require 'bundler/setup'
+
+require 'rspec'
+
 module Enumerable
   def my_each
     return to_enum unless block_given?

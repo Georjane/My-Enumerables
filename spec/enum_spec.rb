@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'bundler/setup'
+
+require 'rspec'
 require './lib/myenum'
 
 describe Enumerable do

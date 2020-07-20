@@ -1,8 +1,5 @@
-require 'rubygems'
-require 'bundler/setup'
-
 require 'rspec'
-require './lib/myenum'
+require 'myenum'
 
 describe Enumerable do
   let(:arr) { 1..3 }

@@ -32,6 +32,26 @@ $ cd <Enumerables>
 $ git clone https://github.com/Georjane/My-Enumerables.git
 ```
 
+## To run the code:
+
+```
+$ ruby myenum.rb
+```
+
+## Testing
+### Install Rspec
+
+```
+$ gem install rspec
+```
+To test the code, run rspec from root of the folder using terminal as follows
+
+```
+rspec
+```
+
+Rspec is used for the test.
+
 ## Author
 
 👤 **Witah Ngu Geojane**
